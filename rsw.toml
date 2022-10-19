@@ -1,0 +1,16 @@
+name = "rsw"
+version = "1.0.0"
+
+interval = 50
+
+cli = "yarn"
+
+[new]
+
+using = "rsw"
+
+dir = "yr_rust_konva"
+
+[[crates]]
+link = true
+name = "@wasm/image"
