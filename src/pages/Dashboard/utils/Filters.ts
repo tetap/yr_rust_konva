@@ -1,4 +1,4 @@
-import initWasm, { grayscale, threshold, to_canny } from '@wasm/image'
+import initWasm, { grayscale, threshold, to_canny, painting } from '@wasm/image'
 
 export const Filters = {
   is_init: false,
@@ -17,5 +17,12 @@ export const Filters = {
    * 二值化
    */
   Threshold: (imageData: ImageData) => imageData.data.set(threshold(imageData, 128)),
-  Canny: (imageData: ImageData) => imageData.data.set(to_canny(imageData, 30.0, 300.0))
+  /**
+   * 提取边缘 目前还有问题 #TODO： 修复提取边缘问题
+   */
+  Canny: (imageData: ImageData) => imageData.data.set(to_canny(imageData, 30.0, 300.0)),
+  /**
+   * 绘画风格
+   */
+  Painting: (imageData: ImageData) => imageData.data.set(painting(imageData, 25))
 }

@@ -37,9 +37,9 @@ pub fn threshold(image_data: ImageData, max_val: i32) -> Vec<u8> {
         let b = data[i] as i32;
         threshold = (r + g + b) / 3;
         if threshold > max_val {
-            threshold = 0
-        } else {
             threshold = 255
+        } else {
+            threshold = 0
         }
         data[i] = threshold as u8;
         data[i + 1] = threshold as u8;
@@ -59,4 +59,32 @@ pub fn to_canny(image_data: ImageData, low_threshold: f32, high_threshold: f32) 
     let image: GrayImage = ImageBuffer::from_raw(width, height, data).unwrap();
     let c_image: GrayImage = canny(&image, low_threshold, high_threshold);
     DynamicImage::ImageLuma8(c_image).to_rgba8().to_vec()
+}
+
+/**
+ * 绘画风格
+ */
+#[wasm_bindgen]
+pub fn painting(image_data: ImageData, sigma: f32) -> Vec<u8> {
+    let width = image_data.width();
+    let height = image_data.height();
+    let data = image_data.data().to_vec();
+    let image = DynamicImage::ImageRgba8(ImageBuffer::from_raw(width, height, data).unwrap());
+    let img_buf = image.to_rgba8();
+    let mut original_buf = image.to_rgba8();
+    let blur_img = imageproc::filter::gaussian_blur_f32(&img_buf, sigma);
+    for x in 0..width {
+        for y in 0..height {
+            let gauss_pixel = blur_img.get_pixel(x, y)[0] as f32;
+            let pixel = original_buf.get_pixel(x, y);
+            let gray_pixel = pixel[0] as f32;
+            let print_pixel = (gray_pixel * 256.0 / gauss_pixel) as u8;
+            original_buf.put_pixel(
+                x,
+                y,
+                image::Rgba([print_pixel, print_pixel, print_pixel, pixel[3]]),
+            )
+        }
+    }
+    original_buf.to_vec()
 }

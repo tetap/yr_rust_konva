@@ -23,5 +23,10 @@ export const FilterConfig: FilterConfigType[] = [
     title: 'Canny',
     value: 3,
     handle: Filters.Canny
+  },
+  {
+    title: '绘画',
+    value: 4,
+    handle: Filters.Painting
   }
 ]
