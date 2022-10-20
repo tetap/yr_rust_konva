@@ -3,3 +3,4 @@
 例子采用react框架编写。
 
 # 预览链接
+[预览链接](https://yirandidi.github.io/yr_rust_konva/)
