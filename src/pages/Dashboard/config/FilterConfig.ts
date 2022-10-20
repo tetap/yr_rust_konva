@@ -28,5 +28,15 @@ export const FilterConfig: FilterConfigType[] = [
     title: '绘画',
     value: 4,
     handle: Filters.Painting
+  },
+  {
+    title: '垂直翻转',
+    value: 5,
+    handle: Filters.flipVertical
+  },
+  {
+    title: '水平翻转',
+    value: 6,
+    handle: Filters.flipHorizontal
   }
 ]

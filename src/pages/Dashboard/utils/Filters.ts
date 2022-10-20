@@ -1,4 +1,4 @@
-import initWasm, { grayscale, threshold, to_canny, painting } from '@wasm/image'
+import initWasm, { grayscale, threshold, to_canny, painting, flip } from '@wasm/image'
 
 export const Filters = {
   is_init: false,
@@ -24,5 +24,13 @@ export const Filters = {
   /**
    * 绘画风格
    */
-  Painting: (imageData: ImageData) => imageData.data.set(painting(imageData, 25))
+  Painting: (imageData: ImageData) => imageData.data.set(painting(imageData, 25)),
+  /**
+   * 垂直翻转
+   */
+  flipVertical: (imageData: ImageData) => imageData.data.set(flip(imageData, false, true)),
+  /**
+   * 水平翻转
+   */
+  flipHorizontal: (imageData: ImageData) => imageData.data.set(flip(imageData, true, false))
 }

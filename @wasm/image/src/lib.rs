@@ -88,3 +88,22 @@ pub fn painting(image_data: ImageData, sigma: f32) -> Vec<u8> {
     }
     original_buf.to_vec()
 }
+
+/*
+* 图片翻转
+*/
+#[wasm_bindgen]
+pub fn flip(image_data: ImageData, flip_x: bool, flip_y: bool) -> Vec<u8> {
+    let width = image_data.width();
+    let height = image_data.height();
+    let raw_pixels = image_data.data().to_vec();
+    let img_buffer = ImageBuffer::from_vec(width, height, raw_pixels).unwrap();
+    let mut img = DynamicImage::ImageRgba8(img_buffer);
+    if flip_x {
+        img = img.fliph();
+    }
+    if flip_y {
+        img = img.flipv();
+    }
+    img.to_rgba8().to_vec()
+}
