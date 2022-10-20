@@ -1,0 +1,1 @@
+System.register(["./vendor-legacy.592faadb.js","./common-legacy.1be315b0.js"],(function(e,t){"use strict";var n;return{setters:[e=>{n=e.r},()=>{}],execute:function(){e("u",(function(e){n.exports.useEffect((function(){null==e||e()}),[])}))}}}));
