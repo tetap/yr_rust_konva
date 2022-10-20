@@ -13,10 +13,19 @@ export const FilterContainer = css({
   justifyContent: 'center'
 })
 
-// 画布样式
-export const FilterContainerCanvas = css({
+export const FilterContainerWrap = css({
   width: '70vmin',
   height: '70vmin',
   display: 'block',
-  backgroundColor: '#f2f2f2'
+  flex: 'none',
+  overflow: 'auto'
+})
+
+// 画布样式
+export const FilterContainerCanvas = css({
+  width: '100%',
+  height: '100%',
+  display: 'block',
+  backgroundColor: '#f2f2f2',
+  flex: 'none'
 })

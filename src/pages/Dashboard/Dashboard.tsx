@@ -2,7 +2,7 @@ import React from 'react'
 import Konva from 'konva'
 import { useMount } from 'ahooks'
 import { fileOpen } from 'browser-fs-access'
-import { FilterContainer, FilterContainerCanvas, TitleCss } from './style'
+import { FilterContainer, FilterContainerCanvas, TitleCss, FilterContainerWrap } from './style'
 import { ImageUtils } from './utils/image'
 import { KonvaUtils } from './utils/konva'
 // 组件 ↓
@@ -38,11 +38,24 @@ export default function Dashboard() {
     const image = await ImageUtils.file2image(file)
     const imageKonva = await KonvaUtils.getInstance().drawImage(image)
     setImage(imageKonva)
+    setFilter(siderValue, imageKonva)
   }
 
   const handleSiderChange = (id: number) => {
+    if (id === siderValue) return
     setSiderValue(id)
-    Filters.init()
+    if (image) {
+      setFilter(id, image)
+    }
+  }
+
+  const setFilter = async (value: number, image: Konva.Image) => {
+    await Filters.init()
+    const filter = FilterConfig.find((c) => c.value === value)
+    if (filter) {
+      image?.cache()
+      image?.filters([filter.handle])
+    }
   }
 
   return (
@@ -60,7 +73,9 @@ export default function Dashboard() {
           disabled={!image}
           onChange={handleSiderChange}
         />
-        <div ref={ContainerRef} css={FilterContainerCanvas}></div>
+        <div css={FilterContainerWrap}>
+          <div ref={ContainerRef} css={FilterContainerCanvas}></div>
+        </div>
       </div>
     </>
   )

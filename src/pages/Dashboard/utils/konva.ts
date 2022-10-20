@@ -36,7 +36,6 @@ export class KonvaUtils {
     const y = Math.floor((stageHeight - height) / 2)
     const x = Math.floor((stageWidth - width) / 2)
     const imageKonva = new Konva.Image({ image, width, height, y, x })
-    imageKonva.cache()
     layer.add(imageKonva)
     return imageKonva
   }

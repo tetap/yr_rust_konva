@@ -3,6 +3,7 @@ name = "image"
 version = "1.0.0"
 authors = ["yiran <239559238@qq.com>"]
 edition = "2021"
+description = "图片处理"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -12,6 +13,7 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 wasm-bindgen = "0.2.81"
 image = "0.24.2"
+imageproc = "0.23.0"
 
 [dependencies.web-sys]
 features = [

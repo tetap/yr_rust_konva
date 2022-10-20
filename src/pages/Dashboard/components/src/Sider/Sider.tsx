@@ -13,7 +13,7 @@ const SiderComponent = <T,>(props: ISiderProps<T>) => {
       orientation="vertical"
       color="primary"
       exclusive
-      sx={{ marginRight: 1 }}
+      sx={{ marginRight: 1, flex: 'none' }}
     >
       {data.map((item, index) => {
         const { value, title } = item
