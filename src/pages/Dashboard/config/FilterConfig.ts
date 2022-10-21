@@ -43,5 +43,10 @@ export const FilterConfig: FilterConfigType[] = [
     title: '反色',
     value: 7,
     handle: Filters.inverse
+  },
+  {
+    title: '扩散',
+    value: 8,
+    handle: Filters.floyd_steinberg
   }
 ]

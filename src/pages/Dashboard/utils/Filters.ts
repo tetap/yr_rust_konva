@@ -1,4 +1,12 @@
-import initWasm, { grayscale, threshold, canny, painting, flip, inverse } from '@wasm/image'
+import initWasm, {
+  grayscale,
+  threshold,
+  canny,
+  painting,
+  flip,
+  inverse,
+  floyd_steinberg
+} from '@wasm/image'
 
 export const Filters = {
   is_init: false,
@@ -39,5 +47,9 @@ export const Filters = {
   /**
    * 反色
    */
-  inverse: (imageData: ImageData) => imageData.data.set(inverse(imageData))
+  inverse: (imageData: ImageData) => imageData.data.set(inverse(imageData)),
+  /**
+   * floyd_steinberg扩散算法
+   */
+  floyd_steinberg: (imageData: ImageData) => imageData.data.set(floyd_steinberg(imageData))
 }

@@ -10,7 +10,7 @@ pub fn grayscale(image_data: ImageData) -> Vec<u8> {
     _grayscale(data)
 }
 
-fn _grayscale(mut data: Vec<u8>) -> Vec<u8> {
+pub fn _grayscale(mut data: Vec<u8>) -> Vec<u8> {
     let len = data.len();
     let mut brightness: f32;
     for i in (0..len).step_by(4) {
