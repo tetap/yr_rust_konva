@@ -18,9 +18,12 @@ export const Filters = {
    */
   Threshold: (imageData: ImageData) => imageData.data.set(threshold(imageData, 128)),
   /**
-   * 提取边缘 目前还有问题 #TODO： 修复提取边缘问题
+   * 提取边缘
    */
-  Canny: (imageData: ImageData) => imageData.data.set(to_canny(imageData, 30.0, 300.0)),
+  Canny: (imageData: ImageData) => {
+    imageData.data.set(to_canny(imageData, 50.0, 100.0))
+    console.log(to_canny(imageData, 50.0, 100.0))
+  },
   /**
    * 绘画风格
    */
