@@ -1,4 +1,4 @@
-import initWasm, { grayscale, threshold, canny, painting, flip } from '@wasm/image'
+import initWasm, { grayscale, threshold, canny, painting, flip, inverse } from '@wasm/image'
 
 export const Filters = {
   is_init: false,
@@ -21,7 +21,7 @@ export const Filters = {
    * 提取边缘
    */
   Canny: (imageData: ImageData) => {
-    imageData.data.set(canny(imageData, 50.0, 100.0))
+    // imageData.data.set(canny(imageData, 50.0, 100.0))
     console.log(canny(imageData, 50.0, 100.0))
   },
   /**
@@ -35,5 +35,9 @@ export const Filters = {
   /**
    * 水平翻转
    */
-  flipHorizontal: (imageData: ImageData) => imageData.data.set(flip(imageData, true, false))
+  flipHorizontal: (imageData: ImageData) => imageData.data.set(flip(imageData, true, false)),
+  /**
+   * 反色
+   */
+  inverse: (imageData: ImageData) => imageData.data.set(inverse(imageData))
 }

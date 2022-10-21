@@ -15,7 +15,7 @@ import { Filters } from './utils/Filters'
 export default function Dashboard() {
   const ContainerRef = React.createRef<HTMLDivElement>()
   const [image, setImage] = React.useState<Konva.Image>()
-  const [siderValue, setSiderValue] = React.useState<number>(-1)
+  const [siderValue, setSiderValue] = React.useState<number[]>([])
   useMount(() => {
     const { current: container } = ContainerRef
     if (!container) throw new Error('Container.current is null')
@@ -41,21 +41,27 @@ export default function Dashboard() {
     setFilter(siderValue, imageKonva)
   }
 
+  // 滤镜回应事件
   const handleSiderChange = (id: number) => {
-    if (id === siderValue) return
-    setSiderValue(id)
+    const values = [...siderValue]
+    const index = values.findIndex((value) => value === id)
+    if (index === -1) {
+      values.push(id)
+    } else {
+      values.splice(index, 1)
+    }
+    setSiderValue(values)
     if (image) {
-      setFilter(id, image)
+      setFilter(values, image)
     }
   }
 
-  const setFilter = async (value: number, image: Konva.Image) => {
+  // 设置滤镜
+  const setFilter = async (filter: number[], image: Konva.Image) => {
+    const filters = FilterConfig.filter((item) => filter.includes(item.value))
     await Filters.init()
-    const filter = FilterConfig.find((c) => c.value === value)
-    if (filter) {
-      image?.cache()
-      image?.filters([filter.handle])
-    }
+    image?.cache()
+    image?.filters(filters.map((item) => item.handle))
   }
 
   return (

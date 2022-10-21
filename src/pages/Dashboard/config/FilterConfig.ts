@@ -38,5 +38,10 @@ export const FilterConfig: FilterConfigType[] = [
     title: '水平翻转',
     value: 6,
     handle: Filters.flipHorizontal
+  },
+  {
+    title: '反色',
+    value: 7,
+    handle: Filters.inverse
   }
 ]

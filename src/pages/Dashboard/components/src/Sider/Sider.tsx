@@ -31,7 +31,7 @@ export const Sider = React.memo(SiderComponent) as typeof SiderComponent
 
 export interface ISiderProps<T> {
   data: ISiderPropsDataItem<T>[]
-  value: T
+  value: T[]
   disabled: boolean
   onChange?: (value: T) => void
 }

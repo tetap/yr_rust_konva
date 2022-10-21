@@ -26,6 +26,7 @@ fn _grayscale(mut data: Vec<u8>) -> Vec<u8> {
 }
 
 #[test]
+#[cfg(test)]
 fn test_grayscale() {
     use image::DynamicImage;
     use image::ImageBuffer;
