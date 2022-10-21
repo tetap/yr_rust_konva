@@ -1,4 +1,4 @@
-import initWasm, { grayscale, threshold, to_canny, painting, flip } from '@wasm/image'
+import initWasm, { grayscale, threshold, canny, painting, flip } from '@wasm/image'
 
 export const Filters = {
   is_init: false,
@@ -21,8 +21,8 @@ export const Filters = {
    * 提取边缘
    */
   Canny: (imageData: ImageData) => {
-    imageData.data.set(to_canny(imageData, 50.0, 100.0))
-    console.log(to_canny(imageData, 50.0, 100.0))
+    imageData.data.set(canny(imageData, 50.0, 100.0))
+    console.log(canny(imageData, 50.0, 100.0))
   },
   /**
    * 绘画风格
