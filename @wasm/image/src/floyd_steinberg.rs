@@ -2,8 +2,6 @@ use image::{DynamicImage, ImageBuffer};
 use wasm_bindgen::prelude::*;
 use web_sys::ImageData;
 
-use crate::grayscale;
-
 #[wasm_bindgen]
 pub fn floyd_steinberg(image_data: ImageData) -> Vec<u8> {
     let width = image_data.width();
