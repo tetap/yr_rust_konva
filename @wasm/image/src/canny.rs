@@ -22,11 +22,11 @@ fn _canny(
     low_threshold: f32,
     high_threshold: f32,
 ) -> Vec<u8> {
-    use imageproc::edges::canny;
+    use crate::edges;
     let image_buf = ImageBuffer::from_vec(width, height, data.clone()).unwrap();
-    let image = DynamicImage::ImageRgba8(image_buf);
-    let image_luma = image.into_luma8();
-    let canny_image_buf = canny(&image_luma, low_threshold, high_threshold);
+    let image = DynamicImage::ImageRgba8(image_buf.clone());
+    let image_luma = image.clone().into_luma8();
+    let canny_image_buf = edges::canny(&image_luma, low_threshold, high_threshold);
     let mut canny_image = DynamicImage::ImageLuma8(canny_image_buf);
     canny_image.invert();
     canny_image.to_rgba8().to_vec()

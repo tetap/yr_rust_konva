@@ -5,3 +5,4 @@ mod grayscale;
 mod inverse;
 mod painting;
 mod threshold;
+mod edges;
