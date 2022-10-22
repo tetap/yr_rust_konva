@@ -2,12 +2,14 @@ use image::{DynamicImage, ImageBuffer};
 use wasm_bindgen::prelude::*;
 use web_sys::ImageData;
 
+use crate::grayscale::{self};
+
 #[wasm_bindgen]
 pub fn floyd_steinberg(image_data: ImageData) -> Vec<u8> {
     let width = image_data.width();
     let height = image_data.height();
     let raw_pixels = image_data.data().to_vec();
-    _floyd_steinberg(width, height, raw_pixels)
+    _floyd_steinberg(width, height, grayscale::_grayscale(raw_pixels))
 }
 
 fn _floyd_steinberg(width: u32, height: u32, data: Vec<u8>) -> Vec<u8> {

@@ -47,6 +47,37 @@ export const FilterConfig: FilterConfigType[] = [
   {
     title: '扩散',
     value: 8,
-    handle: Filters.floyd_steinberg
+    handle: (imageData: ImageData) => {
+      const start = Date.now()
+      Filters.floyd_steinberg(imageData)
+      console.log('wasm floyd_steinberg time:', Date.now() - start)
+    }
+  },
+  {
+    title: 'js扩散',
+    value: 9,
+    /**
+     * js floyd_steinberg扩散算法
+     */
+    handle: (imageData: ImageData) => {
+      const start = Date.now()
+      Filters.floyd_steinberg(imageData)
+      const { width, height, data } = imageData
+      const luminance = new Uint8ClampedArray(width * height)
+      let l, i
+      for (l = 0, i = 0; i < data.length; l++, i += 4) {
+        luminance[l] = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114
+      }
+      for (l = 0, i = 0; i < data.length; l++, i += 4) {
+        const value = luminance[l] < 129 ? 0 : 255
+        const error = Math.floor((luminance[l] - value) >> 4)
+        data.fill(value, i, i + 3)
+        luminance[l + 1] += error * 7
+        luminance[l + width - 1] += error * 3
+        luminance[l + width] += error * 5
+        luminance[l + width + 1] += error * 1
+      }
+      console.log('js floyd_steinberg time:', Date.now() - start)
+    }
   }
 ]
