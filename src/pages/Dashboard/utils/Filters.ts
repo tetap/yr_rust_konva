@@ -32,7 +32,7 @@ export const Filters = {
   /**
    * 绘画风格
    */
-  Painting: (imageData: ImageData) => imageData.data.set(painting(imageData, 25)),
+  Painting: (imageData: ImageData) => imageData.data.set(painting(imageData, 15.0)),
   /**
    * 垂直翻转
    */

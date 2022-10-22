@@ -2,6 +2,8 @@ use image::{DynamicImage, ImageBuffer};
 use wasm_bindgen::prelude::*;
 use web_sys::ImageData;
 
+use crate::threshold::{self};
+
 /**
  * 绘画风格
  */
@@ -10,7 +12,7 @@ pub fn painting(image_data: ImageData, sigma: f32) -> Vec<u8> {
     let width = image_data.width();
     let height = image_data.height();
     let data = image_data.data().to_vec();
-    _painting(width, height, data, sigma)
+    threshold::_threshold(_painting(width, height, data, sigma), 210)
 }
 
 fn _painting(width: u32, height: u32, data: Vec<u8>, sigma: f32) -> Vec<u8> {

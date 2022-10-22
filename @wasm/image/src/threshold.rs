@@ -10,7 +10,7 @@ pub fn threshold(image_data: ImageData, max_val: i32) -> Vec<u8> {
     _threshold(data, max_val)
 }
 
-fn _threshold(mut data: Vec<u8>, max_val: i32) -> Vec<u8> {
+pub fn _threshold(mut data: Vec<u8>, max_val: i32) -> Vec<u8> {
     let len = data.len();
     let mut threshold: i32;
     for i in (0..len).step_by(4) {
