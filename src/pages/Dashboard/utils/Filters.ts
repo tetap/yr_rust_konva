@@ -28,10 +28,7 @@ export const Filters = {
   /**
    * 提取边缘
    */
-  Canny: (imageData: ImageData) => {
-    // imageData.data.set(canny(imageData, 50.0, 100.0))
-    console.log(canny(imageData, 50.0, 100.0))
-  },
+  Canny: (imageData: ImageData) => imageData.data.set(canny(imageData, 50.0, 100.0)),
   /**
    * 绘画风格
    */

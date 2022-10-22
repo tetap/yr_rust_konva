@@ -2,7 +2,7 @@ use image::{DynamicImage, ImageBuffer};
 use wasm_bindgen::prelude::*;
 use web_sys::ImageData;
 
-use crate::grayscale;
+use crate::grayscale::{self};
 
 /**
  * canny 目前还有问题 #TODO： 修复提取边缘问题
@@ -23,9 +23,13 @@ fn _canny(
     high_threshold: f32,
 ) -> Vec<u8> {
     use imageproc::edges::canny;
-    let image = ImageBuffer::from_raw(width, height, data).unwrap();
-    let edges = canny(&image, low_threshold, high_threshold);
-    DynamicImage::ImageLuma8(edges).to_rgba8().to_vec()
+    let image_buf = ImageBuffer::from_vec(width, height, data.clone()).unwrap();
+    let image = DynamicImage::ImageRgba8(image_buf);
+    let image_luma = image.into_luma8();
+    let canny_image_buf = canny(&image_luma, low_threshold, high_threshold);
+    let mut canny_image = DynamicImage::ImageLuma8(canny_image_buf);
+    canny_image.invert();
+    canny_image.to_rgba8().to_vec()
 }
 
 #[test]
