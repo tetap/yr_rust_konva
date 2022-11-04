@@ -15,8 +15,8 @@ pub fn _threshold(mut data: Vec<u8>, max_val: i32) -> Vec<u8> {
     let mut threshold: i32;
     for i in (0..len).step_by(4) {
         let r = data[i] as i32;
-        let g = data[i] as i32;
-        let b = data[i] as i32;
+        let g = data[i + 1] as i32;
+        let b = data[i + 2] as i32;
         threshold = (r + g + b) / 3;
         if threshold > max_val {
             threshold = 255

@@ -24,7 +24,12 @@ export const Filters = {
   /**
    * 二值化
    */
-  Threshold: (imageData: ImageData) => imageData.data.set(threshold(imageData, 128)),
+  Threshold: (imageData: ImageData) => {
+    const start = new Date().getTime()
+    imageData.data.set(threshold(imageData, 128))
+    const end = new Date().getTime()
+    console.log(`${end - start}`)
+  },
   /**
    * 提取边缘
    */

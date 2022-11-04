@@ -15,8 +15,8 @@ pub fn _grayscale(mut data: Vec<u8>) -> Vec<u8> {
     let mut brightness: f32;
     for i in (0..len).step_by(4) {
         let r = data[i] as f32;
-        let g = data[i] as f32;
-        let b = data[i] as f32;
+        let g = data[i + 1] as f32;
+        let b = data[i + 2] as f32;
         brightness = 0.34 * r + 0.5 * g + 0.16 * b;
         data[i] = brightness as u8;
         data[i + 1] = brightness as u8;
