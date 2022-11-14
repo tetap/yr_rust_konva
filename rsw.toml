@@ -14,3 +14,7 @@ dir = "yr_rust_konva"
 [[crates]]
 link = true
 name = "@wasm/image"
+
+[[crates]]
+link = true
+name = "@wasm/wximage"
